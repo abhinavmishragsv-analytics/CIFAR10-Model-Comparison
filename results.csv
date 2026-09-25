@@ -1,0 +1,3 @@
+Model,Accuracy (%),Parameters,Parameters (Millions),FLOPs,GFLOPs,Inference Time (ms)
+Pretrained MobileNetV3-Large,77.05,4214842,4.214842,78122776.0,0.078122776,11.454013000002305
+Custom InceptionNet,39.75,308826,0.308826,323383072.0,0.323383072,21.278000000002066
