@@ -1,140 +1,64 @@
-\# CIFAR-10 Model Comparison
+# CIFAR-10 Model Comparison
 
+<p align="center">
 
+**Pretrained MobileNetV3-Large vs Custom InceptionNet**
 
-PyTorch implementation comparing a customized pretrained MobileNetV3-Large with a custom Inception-style CNN on CIFAR-10.
+A PyTorch-based deep learning experiment comparing a customized pretrained CNN with a newly developed Inception-style architecture on the CIFAR-10 image classification dataset.
 
+</p>
 
+---
 
-\## Problem
+## 📌 Problem Statement
 
+**Problem Number: 5**
 
+The objective of this laboratory experiment is to:
 
-\- Problem Number: 5
+1. Customize an existing pretrained deep learning model.
+2. Develop a new CNN architecture.
+3. Train both models on the same classification task.
+4. Compare their performance using:
+   - Accuracy
+   - Number of Parameters / Weights
+   - FLOPs
+   - Inference Time
 
-\- Dataset: CIFAR-10
+### Selected Configuration
 
-\- Framework: PyTorch
-
-\- Pretrained Model: MobileNetV3-Large
-
-\- Custom Model: Custom InceptionNet
-
-
-
-\## Experimental Setup
-
-
-
-| Parameter | Value |
-
+| Component | Selection |
 |---|---|
+| Dataset | CIFAR-10 |
+| Framework | PyTorch |
+| Pretrained Model | MobileNetV3-Large |
+| Custom Model | Custom InceptionNet |
+| Task | Image Classification |
+| Number of Classes | 10 |
 
-| Input Size | 64 × 64 |
+---
 
-| Batch Size | 128 |
+## 🧠 Approach
 
-| Epochs | 2 |
+Two different modeling approaches were evaluated.
 
-| Training Samples | 10,000 |
+### 1. Pretrained MobileNetV3-Large
 
-| Testing Samples | 2,000 |
+A MobileNetV3-Large model pretrained on ImageNet was used as the baseline transfer-learning model.
 
-| Device | CPU |
+The original classification layer was replaced with a new fully connected layer containing **10 output neurons**, corresponding to the ten CIFAR-10 classes.
 
-| Classes | 10 |
+The pretrained feature extractor was frozen while the customized classifier was trained for the CIFAR-10 task.
 
+**Pipeline:**
 
-
-\## Results
-
-
-
-| Model | Accuracy (%) | Parameters | GFLOPs | Inference Time (ms) |
-
-|---|---:|---:|---:|---:|
-
-| Pretrained MobileNetV3-Large | 77.05 | 4,214,842 | 0.0781 | 11.454 |
-
-| Custom InceptionNet | 39.75 | 308,826 | 0.3234 | 21.278 |
-
-
-
-\## Comparison
-
-
-
-MobileNetV3-Large achieved 77.05% accuracy, while the Custom InceptionNet achieved 39.75%.
-
-
-
-The Custom InceptionNet has substantially fewer parameters, but its measured FLOPs and CPU inference time are higher.
-
-
-
-This demonstrates that parameter count alone does not determine computational complexity or inference performance.
-
-
-
-\## Graphs
-
-
-
-\### Accuracy
-
-
-
-!\[Accuracy](accuracy\_comparison.png)
-
-
-
-\### Parameters
-
-
-
-!\[Parameters](parameters\_comparison.png)
-
-
-
-\### FLOPs
-
-
-
-!\[FLOPs](flops\_comparison.png)
-
-
-
-\### Inference Time
-
-
-
-!\[Inference Time](inference\_comparison.png)
-
-
-
-\### Overall Comparison
-
-
-
-!\[Overall Comparison](complete\_comparison.png)
-
-
-
-\## Technologies
-
-
-
-\- Python
-
-\- PyTorch
-
-\- Torchvision
-
-\- THOP
-
-\- Pandas
-
-\- Matplotlib
-
-\- Seaborn
-
+```text
+ImageNet Pretrained MobileNetV3-Large
+                ↓
+       Freeze Feature Extractor
+                ↓
+       Replace Final Classifier
+                ↓
+       10-Class CIFAR-10 Output
+                ↓
+              Train
